@@ -31,6 +31,10 @@ public class BookServer {
             send(exchange, "Returned");
         });
 
+        server.createContext("/", (exchange) -> {
+    send(exchange, "Library API Running 🚀\nGo to /books");
+});
+
         server.setExecutor(null);
         server.start();
 
@@ -47,6 +51,7 @@ public class BookServer {
 
     static void send(HttpExchange exchange, String response) throws IOException {
         exchange.sendResponseHeaders(200, response.length());
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
