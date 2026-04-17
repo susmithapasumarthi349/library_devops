@@ -1,5 +1,7 @@
+const BASE_URL = "http://127.0.0.1:57647";
+
 function loadBooks() {
-    fetch("http://localhost:9090/books")
+    fetch(BASE_URL + "/books")
         .then(res => res.text())
         .then(data => {
             const list = document.getElementById("bookList");
@@ -26,11 +28,12 @@ function loadBooks() {
 
                 list.appendChild(card);
             });
-        });
+        })
+        .catch(err => console.log(err));
 }
 
 function borrowBook(id) {
-    fetch(`http://localhost:9090/borrow?id=${id}`)
+    fetch(BASE_URL + `/borrow?id=${id}`)
         .then(() => {
             alert("Book borrowed!");
             loadBooks();
@@ -38,7 +41,7 @@ function borrowBook(id) {
 }
 
 function returnBook(id) {
-    fetch(`http://localhost:9090/return?id=${id}`)
+    fetch(BASE_URL + `/return?id=${id}`)
         .then(() => {
             alert("Book returned!");
             loadBooks();
