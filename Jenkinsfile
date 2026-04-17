@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/susmithapasumarthi349/library_devops.git'
+                git branch: 'main', url: 'https://github.com/susmithapasumarthi349/library_devops.git'
             }
         }
 
